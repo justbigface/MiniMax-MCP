@@ -25,3 +25,5 @@ ENV_RESOURCE_MODE = "MINIMAX_API_RESOURCE_MODE"
 
 RESOURCE_MODE_LOCAL = "local" # save resource to local file system
 RESOURCE_MODE_URL = "url" # provide resource url
+
+ENV_FASTMCP_LOG_LEVEL = "FASTMCP_LOG_LEVEL"

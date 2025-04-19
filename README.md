@@ -42,7 +42,7 @@
 ## Quickstart with MCP Client
 1. Get your API key from [MiniMax](https://www.minimax.io/platform/user-center/basic-information/interface-key). 
 2. Install `uv` (Python package manager), install with `curl -LsSf https://astral.sh/uv/install.sh | sh` or see the `uv` [repo](https://github.com/astral-sh/uv) for additional install methods.
-3. **Important: API HOST&KEY are different in different region**, they must match, otherwise you will receive an `Invalid API key` error.
+3. **Important**: The API host and key vary by region and must match; otherwise, you'll encounter an `Invalid API key` error.
 
 |Region| Global  | Mainland  |
 |:--|:-----|:-----|

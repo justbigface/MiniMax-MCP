@@ -33,14 +33,14 @@ api_key = os.getenv(ENV_MINIMAX_API_KEY)
 base_path = os.getenv(ENV_MINIMAX_MCP_BASE_PATH)
 api_host = os.getenv(ENV_MINIMAX_API_HOST)
 resource_mode = os.getenv(ENV_RESOURCE_MODE) or RESOURCE_MODE_URL
-
+fastmcp_log_level = os.getenv(ENV_FASTMCP_LOG_LEVEL) or "WARNING"
 
 if not api_key:
     raise ValueError("MINIMAX_API_KEY environment variable is required")
 if not api_host:
     raise ValueError("MINIMAX_API_HOST environment variable is required")
 
-mcp = FastMCP("Minimax")
+mcp = FastMCP("Minimax",log_level=fastmcp_log_level)
 api_client = MinimaxAPIClient(api_key, api_host)
 
 
@@ -51,7 +51,7 @@ api_client = MinimaxAPIClient(api_key, api_host)
 
     COST WARNING: This tool makes an API call to Minimax which may incur costs. Only use when explicitly requested by the user.
 
-     Args:
+    Args:
         text (str): The text to convert to speech.
         voice_id (str, optional): The id of the voice to use. For example, "male-qn-qingse"/"audiobook_female_1"/"cute_boy"/"Charming_Lady"...
         model (string, optional): The model to use.
@@ -143,7 +143,7 @@ def text_to_audio(
 @mcp.tool(
     description="""List all voices available. Only supports when api_host is https://api.minimax.chat
 
-     Args:
+    Args:
         voice_type (str, optional): The type of voices to list. Values range ["all", "system", "voice_cloning"], with "all" being the default.
     Returns:
         Text content with the list of voices.
