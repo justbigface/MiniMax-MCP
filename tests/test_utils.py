@@ -3,20 +3,13 @@ from pathlib import Path
 import tempfile
 from minimax_mcp.utils import (
     MinimaxMcpError,
-    throw_error,
     is_file_writeable,
-    make_output_file,
-    make_output_path,
+    build_output_file,
+    build_output_path,
     find_similar_filenames,
     try_find_similar_files,
     process_input_file,
 )
-
-
-def test_make_error():
-    with pytest.raises(MinimaxMcpError):
-        throw_error("Test error")
-
 
 def test_is_file_writeable():
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -29,17 +22,42 @@ def test_make_output_file():
     tool = "test"
     text = "hello world"
     output_path = Path("/tmp")
-    result = make_output_file(tool, text, output_path, "mp3")
+    result = build_output_file(tool, text, output_path, "mp3")
     assert result.name.startswith("test_hello")
     assert result.suffix == ".mp3"
 
 
 def test_make_output_path():
+    # Test with temporary directory
     with tempfile.TemporaryDirectory() as temp_dir:
-        result = make_output_path(temp_dir)
+        result = build_output_path(temp_dir)
         assert result == Path(temp_dir)
         assert result.exists()
         assert result.is_dir()
+
+    # Test with None output_directory (should use base_path)
+    base_path = "/tmp/test_base"
+    result = build_output_path(None, base_path, is_test=True)
+    assert result == Path(base_path)
+    
+    # Test with relative output_directory
+    base_path = "/tmp/test_base"
+    result = build_output_path("subdir", base_path, is_test=True)
+    assert result == Path(base_path) / "subdir"
+    
+    # Test with absolute output_directory (should ignore base_path)
+    abs_path = "/absolute/path"
+    result = build_output_path(abs_path, "/some/base/path", is_test=True)
+    assert result == Path(abs_path)
+
+    abs_path = "~/absolute/path"
+    result = build_output_path(abs_path, "/some/base/path", is_test=True)
+    assert result == Path(Path.home() / "absolute/path")
+    
+    # Test with None base_path (should use desktop)
+    result = build_output_path(None, None, is_test=True)
+    assert result == Path.home() / "Desktop"
+    
 
 
 def test_find_similar_filenames():

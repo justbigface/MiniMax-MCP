@@ -106,7 +106,7 @@
 
 ## FAQ
 ### 1. invalid api key
-请检查你获取的API Key和填写的API Host是否是同一地区的：
+请检查你获取的 API Key 和填写的 API Host 是否是同一地区的：
 |地区| 国际  | 国内  |
 |:--|:-----|:-----|
 |MINIMAX_API_KEY| 获取密钥 [MiniMax国际版](https://www.minimax.io/platform/user-center/basic-information/interface-key) | 获取密钥 [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |

@@ -24,13 +24,15 @@ from minimax_mcp.utils import (
     process_input_file,
     play
 )
+from pathlib import Path
+
 from minimax_mcp.const import *
 from minimax_mcp.exceptions import MinimaxAPIError, MinimaxRequestError
 from minimax_mcp.client import MinimaxAPIClient
 
 load_dotenv()
 api_key = os.getenv(ENV_MINIMAX_API_KEY)
-base_path = os.getenv(ENV_MINIMAX_MCP_BASE_PATH)
+base_path = os.getenv(ENV_MINIMAX_MCP_BASE_PATH) or "~/Desktop"
 api_host = os.getenv(ENV_MINIMAX_API_HOST)
 resource_mode = os.getenv(ENV_RESOURCE_MODE) or RESOURCE_MODE_URL
 fastmcp_log_level = os.getenv(ENV_FASTMCP_LOG_LEVEL) or "WARNING"
@@ -64,13 +66,15 @@ api_client = MinimaxAPIClient(api_key, api_host)
         channel (int, optional): Channel of the generated audio. Controls the channel of the generated speech. Values range [1, 2] with 1 being the default channel.
         format (str, optional): Format of the generated audio. Controls the format of the generated speech. Values range ["pcm", "mp3","flac"] with "mp3" being the default format.
         language_boost (str, optional): Language boost of the generated audio. Controls the language boost of the generated speech. Values range ['Chinese', 'Chinese,Yue', 'English', 'Arabic', 'Russian', 'Spanish', 'French', 'Portuguese', 'German', 'Turkish', 'Dutch', 'Ukrainian', 'Vietnamese', 'Indonesian', 'Japanese', 'Italian', 'Korean', 'Thai', 'Polish', 'Romanian', 'Greek', 'Czech', 'Finnish', 'Hindi', 'auto'] with "auto" being the default language boost.
+        output_directory (str): The directory to save the audio to.
+
     Returns:
         Text content with the path to the output file and name of the voice used.
     """
 )
 def text_to_audio(
     text: str,
-    output_directory: str | None = None,
+    output_directory: str = None,
     voice_id: str = DEFAULT_VOICE_ID,
     model: str = DEFAULT_SPEECH_MODEL,
     speed: float = DEFAULT_SPEED,
@@ -187,6 +191,7 @@ def list_voices(
         file (str): The path to the audio file to clone or a URL to the audio file.
         text (str, optional): The text to use for the demo audio.
         is_url (bool, optional): Whether the file is a URL. Defaults to False.
+        output_directory (str): The directory to save the demo audio to.
     Returns:
         Text content with the voice id of the cloned voice.
     """
@@ -195,7 +200,7 @@ def voice_clone(
     voice_id: str, 
     file: str,
     text: str,
-    output_directory: str | None = None,
+    output_directory: str = None,
     is_url: bool = False
 ) -> TextContent:
     try:
@@ -304,7 +309,7 @@ def play_audio(input_file_path: str, is_url: bool = False) -> TextContent:
             -Follow: [Tracking shot]
             -Static: [Static shot]
         first_frame_image (str): The first frame image. The model must be "I2V" Series.
-        output_directory (str, optional): The directory to save the video to.
+        output_directory (str): The directory to save the video to.
     Returns:
         Text content with the path to the output video file.
     """
@@ -313,7 +318,7 @@ def generate_video(
     model: str = DEFAULT_T2V_MODEL,
     prompt: str = "",
     first_frame_image  = None,
-    output_directory: str | None = None,
+    output_directory: str = None,
 ):
     try:
         if not prompt:
@@ -422,7 +427,7 @@ def generate_video(
         aspect_ratio (str, optional): The aspect ratio of the image. Values range ["1:1", "16:9","4:3", "3:2", "2:3", "3:4", "9:16", "21:9"], with "1:1" being the default.
         n (int, optional): The number of images to generate. Values range [1, 9], with 1 being the default.
         prompt_optimizer (bool, optional): Whether to optimize the prompt. Values range [True, False], with True being the default.
-        output_directory (str, optional): The directory to save the image to.
+        output_directory (str): The directory to save the image to.
     Returns:
         Text content with the path to the output image file.
     """
@@ -433,7 +438,7 @@ def text_to_image(
     aspect_ratio: str = "1:1",
     n: int = 1,
     prompt_optimizer: bool = True,
-    output_directory: str | None = None,
+    output_directory: str = None,
 ):
     try:
         if not prompt:
