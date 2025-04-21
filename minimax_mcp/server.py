@@ -141,7 +141,7 @@ def text_to_audio(
 
 
 @mcp.tool(
-    description="""List all voices available. Only supports when api_host is https://api.minimax.chat
+    description="""List all voices available.
 
     Args:
         voice_type (str, optional): The type of voices to list. Values range ["all", "system", "voice_cloning"], with "all" being the default.
