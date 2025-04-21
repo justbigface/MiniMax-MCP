@@ -104,6 +104,22 @@
 |`generate_video`|根据指定 prompt 生成视频|
 |`text_to_image`|根据指定 prompt 生成图片|
 
+## FAQ
+### 1. invalid api key
+请检查你获取的API Key和填写的API Host是否是同一地区的：
+|地区| 国际  | 国内  |
+|:--|:-----|:-----|
+|MINIMAX_API_KEY| 获取密钥 [MiniMax国际版](https://www.minimax.io/platform/user-center/basic-information/interface-key) | 获取密钥 [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
+|MINIMAX_API_HOST| ​https://api.minimaxi.chat （请注意额外的 **"i"** 字母） | ​https://api.minimax.chat |
+
+### 2. spawn uvx ENOENT
+请在你的终端输入一下命令，查看uvx命令的绝对路径：
+```sh
+which uvx
+```
+如果得到如下的输出 (如：/usr/local/bin/uvx)，更新mcp配置 ("command": "/usr/local/bin/uvx"). 
+
+
 ## 使用示例
 
 ⚠️ 注意：使用这些工具可能会产生费用。

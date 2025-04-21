@@ -101,6 +101,21 @@ We support two transport types: stdio and sse.
 |`generate_video`|Generate a video from a prompt|
 |`text_to_image`|Generate a image from a prompt|
 
+## FAQ
+### 1. invalid api key
+Please ensure your API key and API host are regionally aligned
+|Region| Global  | Mainland  |
+|:--|:-----|:-----|
+|MINIMAX_API_KEY| go get from [MiniMax Global](https://www.minimax.io/platform/user-center/basic-information/interface-key) | go get from [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
+|MINIMAX_API_HOST| ​https://api.minimaxi.chat (note the extra **"i"**) | ​https://api.minimax.chat |
+
+### 2. spawn uvx ENOENT
+Please confirm its absolute path by running this command in your terminal:
+```sh
+which uvx
+```
+Once you obtain the absolute path (e.g., /usr/local/bin/uvx), update your configuration to use that path (e.g., "command": "/usr/local/bin/uvx"). 
+
 ## Example usage
 
 ⚠️ Warning: Using these tools may incur costs.
