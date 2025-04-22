@@ -62,10 +62,10 @@ Go to `Claude > Settings > Developer > Edit Config > claude_desktop_config.json`
         "minimax-mcp"
       ],
       "env": {
-        "MINIMAX_API_KEY": "<insert-your-api-key-here>",
-        "MINIMAX_MCP_BASE_PATH": "<local-output-dir-path, such as /User/xxx/Desktop>",
-        "MINIMAX_API_HOST": "<api host, ​https://api.minimaxi.chat|https://api.minimax.chat>",
-        "MINIMAX_API_RESOURCE_MODE": "<optional, [url|local], url is default, audio/image/video are downloaded locally or provided in URL format>"
+        "MINIMAX_API_KEY": "insert-your-api-key-here",
+        "MINIMAX_MCP_BASE_PATH": "local-output-dir-path, such as /User/xxx/Desktop",
+        "MINIMAX_API_HOST": "api host, ​https://api.minimaxi.chat|https://api.minimax.chat",
+        "MINIMAX_API_RESOURCE_MODE": "optional, [url|local], url is default, audio/image/video are downloaded locally or provided in URL format"
       }
     }
   }
