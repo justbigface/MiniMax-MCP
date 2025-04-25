@@ -59,7 +59,8 @@ Go to `Claude > Settings > Developer > Edit Config > claude_desktop_config.json`
     "MiniMax": {
       "command": "uvx",
       "args": [
-        "minimax-mcp"
+        "minimax-mcp",
+        "-y"
       ],
       "env": {
         "MINIMAX_API_KEY": "insert-your-api-key-here",
