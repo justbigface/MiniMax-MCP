@@ -440,7 +440,10 @@ def query_video_generation(task_id: str, output_directory: str = None) -> TextCo
         response_data = api_client.get(f"/v1/query/video_generation?task_id={task_id}")
         status = response_data.get("status")
         if status == "Fail":
-            raise MinimaxRequestError(f"Video generation failed for task_id: {task_id}")
+            return TextContent(
+                type="text",
+                text=f"Video generation FAILED for task_id: {task_id}"
+            )
         elif status == "Success":
             file_id = response_data.get("file_id")
             if not file_id:

@@ -119,6 +119,12 @@ which uvx
 ```
 如果得到如下的输出 (如：/usr/local/bin/uvx)，更新mcp配置 ("command": "/usr/local/bin/uvx"). 
 
+### 3. 如何用 `generate_video` 工具异步生成视频
+在对话前设置一些规则:
+<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/cursor_rule2.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
+或者放到本地客户端的规则中 (以 Cursor 为例):
+<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/cursor_video_rule.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
+
 
 ## 使用示例
 

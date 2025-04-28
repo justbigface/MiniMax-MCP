@@ -101,6 +101,7 @@ We support two transport types: stdio and sse.
 |`voice_clone`|Clone a voice using provided audio files|
 |`generate_video`|Generate a video from a prompt|
 |`text_to_image`|Generate a image from a prompt|
+|`query_video_generation`|Query the result of video generation task|
 
 ## FAQ
 ### 1. invalid api key
@@ -116,6 +117,13 @@ Please confirm its absolute path by running this command in your terminal:
 which uvx
 ```
 Once you obtain the absolute path (e.g., /usr/local/bin/uvx), update your configuration to use that path (e.g., "command": "/usr/local/bin/uvx"). 
+
+### 3. How to use `generate_video` in async-mode
+Define completion rules before starting:
+<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/cursor_rule2.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
+Alternatively, these rules can be configured in your IDE settings (e.g., Cursor):
+<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/cursor_video_rule.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
+
 
 ## Example usage
 
