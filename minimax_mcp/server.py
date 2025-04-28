@@ -310,6 +310,7 @@ def play_audio(input_file_path: str, is_url: bool = False) -> TextContent:
             -Static: [Static shot]
         first_frame_image (str): The first frame image. The model must be "I2V" Series.
         output_directory (str): The directory to save the video to.
+        async_mode (bool, optional): Whether to use async mode. Defaults to False. If True, the video generation task will be submitted asynchronously and the response will return a task_id. Should use `query_video_generation` tool to check the status of the task and get the result.
     Returns:
         Text content with the path to the output video file.
     """
@@ -319,6 +320,7 @@ def generate_video(
     prompt: str = "",
     first_frame_image  = None,
     output_directory: str = None,
+    async_mode: bool = False
 ):
     try:
         if not prompt:
@@ -348,6 +350,12 @@ def generate_video(
         task_id = response_data.get("task_id")
         if not task_id:
             raise MinimaxRequestError("Failed to get task_id from response")
+
+        if async_mode:
+            return TextContent(
+                type="text",
+                text=f"Success. Video generation task submitted: Task ID: {task_id}. Please use `query_video_generation` tool to check the status of the task and get the result."
+            )
 
         # step2: wait for video generation task to complete
         file_id = None
@@ -413,6 +421,62 @@ def generate_video(
         return TextContent(
             type="text",
             text=f"Unexpected error while generating video: {str(e)}"
+        )
+
+
+@mcp.tool(
+    description="""Query the status of a video generation task.
+
+    Args:
+        task_id (str): The task ID to query. Should be the task_id returned by `generate_video` tool if `async_mode` is True.
+        output_directory (str): The directory to save the video to.
+    Returns:
+        Text content with the status of the task.
+    """
+)
+def query_video_generation(task_id: str, output_directory: str = None) -> TextContent:
+    try:
+        file_id = None
+        response_data = api_client.get(f"/v1/query/video_generation?task_id={task_id}")
+        status = response_data.get("status")
+        if status == "Fail":
+            raise MinimaxRequestError(f"Video generation failed for task_id: {task_id}")
+        elif status == "Success":
+            file_id = response_data.get("file_id")
+            if not file_id:
+                raise MinimaxRequestError(f"Missing file_id in success response for task_id: {task_id}")
+        else:
+            return TextContent(
+                type="text",
+                text=f"Video generation task is still processing: Task ID: {task_id}"
+            )
+        file_response = api_client.get(f"/v1/files/retrieve?file_id={file_id}")
+        download_url = file_response.get("file", {}).get("download_url")
+        if not download_url:
+            raise MinimaxRequestError(f"Failed to get download URL for file_id: {file_id}")
+        if resource_mode == RESOURCE_MODE_URL:
+            return TextContent(
+                type="text",
+                text=f"Success. Video URL: {download_url}"
+            )
+        output_path = build_output_path(output_directory, base_path)
+        output_file_name = build_output_file("video", task_id, output_path, "mp4", True)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        video_response = requests.get(download_url)
+        video_response.raise_for_status()
+
+        with open(output_path / output_file_name, "wb") as f:
+            f.write(video_response.content)
+
+        return TextContent(
+            type="text",
+            text=f"Success. Video saved as: {output_path / output_file_name}"
+        )
+    except MinimaxAPIError as e:
+        return TextContent(
+            type="text",
+            text=f"Failed to query video generation status: {str(e)}"
         )
 
 
