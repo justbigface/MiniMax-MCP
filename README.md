@@ -47,7 +47,7 @@
 |Region| Global  | Mainland  |
 |:--|:-----|:-----|
 |MINIMAX_API_KEY| go get from [MiniMax Global](https://www.minimax.io/platform/user-center/basic-information/interface-key) | go get from [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-|MINIMAX_API_HOST| ​https://api.minimaxi.chat (note the extra **"i"**) | ​https://api.minimax.chat |
+|MINIMAX_API_HOST| https://api.minimaxi.chat (note the extra **"i"**) | https://api.minimax.chat |
 
 
 ### Claude Desktop
@@ -65,7 +65,7 @@ Go to `Claude > Settings > Developer > Edit Config > claude_desktop_config.json`
       "env": {
         "MINIMAX_API_KEY": "insert-your-api-key-here",
         "MINIMAX_MCP_BASE_PATH": "local-output-dir-path, such as /User/xxx/Desktop",
-        "MINIMAX_API_HOST": "api host, ​https://api.minimaxi.chat|https://api.minimax.chat",
+        "MINIMAX_API_HOST": "api host, https://api.minimaxi.chat|https://api.minimax.chat",
         "MINIMAX_API_RESOURCE_MODE": "optional, [url|local], url is default, audio/image/video are downloaded locally or provided in URL format"
       }
     }
@@ -74,8 +74,8 @@ Go to `Claude > Settings > Developer > Edit Config > claude_desktop_config.json`
 
 ```
 ⚠️ Warning: The API key needs to match the host. If an error "API Error: invalid api key" occurs, please check your api host:
-- Global Host：`​https://api.minimaxi.chat` (note the extra "i")
-- Mainland Host：​`https://api.minimax.chat`
+- Global Host：`https://api.minimaxi.chat` (note the extra "i")
+- Mainland Host：`https://api.minimax.chat`
 
 If you're using Windows, you will have to enable "Developer Mode" in Claude Desktop to use the MCP server. Click "Help" in the hamburger menu in the top left and select "Enable Developer Mode".
 
@@ -109,7 +109,7 @@ Please ensure your API key and API host are regionally aligned
 |Region| Global  | Mainland  |
 |:--|:-----|:-----|
 |MINIMAX_API_KEY| go get from [MiniMax Global](https://www.minimax.io/platform/user-center/basic-information/interface-key) | go get from [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-|MINIMAX_API_HOST| ​https://api.minimaxi.chat (note the extra **"i"**) | ​https://api.minimax.chat |
+|MINIMAX_API_HOST| https://api.minimaxi.chat (note the extra **"i"**) | https://api.minimax.chat |
 
 ### 2. spawn uvx ENOENT
 Please confirm its absolute path by running this command in your terminal:
