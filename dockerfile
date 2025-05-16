@@ -32,8 +32,7 @@ RUN ln -s /root/.local/bin/uvx /usr/local/bin/uvx
 COPY . .
 
 # ----------------------------------------------------
+# ------- start command -------
+CMD ["/root/.local/bin/uvx", "-vvv", "minimax-mcp",      \
+     "-y", "--host", "0.0.0.0", "--port", "${PORT:-8080}"]
 
-
-# ----------------------------------------------------
-
-CMD ["/bin/sh", "-c", "/root/.local/bin/uvx minimax-mcp -y "]
