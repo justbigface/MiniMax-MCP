@@ -31,8 +31,8 @@ RUN ln -s /root/.local/bin/uvx /usr/local/bin/uvx
 
 COPY . .
 
-# ----------------------------------------------------
-# ------- start command -------
-CMD ["/root/.local/bin/uvx", "-vvv", "minimax-mcp",      \
-     "-y", "--host", "0.0.0.0", "--port", "${PORT:-8080}"]
+
+# 6. **容器启动命令** —— 直接跑 server
+CMD ["/root/.local/bin/python", "-u", "-m", "minimax_mcp.server", \
+     "--host", "0.0.0.0", "--port", "8080"]
 
